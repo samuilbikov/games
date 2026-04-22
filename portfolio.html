@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Python Game Portfolio</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-soft: #1f2937;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #22d3ee;
+      --accent-2: #38bdf8;
+      --ok: #22c55e;
+      --border: #334155;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #020617, #0f172a 35%, #111827);
+      line-height: 1.5;
+    }
+
+    .container {
+      width: min(1080px, 92vw);
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(6px);
+      background: rgba(2, 6, 23, 0.85);
+      z-index: 10;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.85rem 0;
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 4.5rem 0 3.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 3.4vw, 3rem);
+      margin: 0 0 0.8rem;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 700px;
+    }
+
+    .hero-actions {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.65rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    .btn.primary {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      border: none;
+      color: #062235;
+    }
+
+    .section-title {
+      margin: 0 0 1rem;
+      font-size: 1.45rem;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      margin: 0 0 1.4rem;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .card {
+      background: linear-gradient(180deg, #111827, #0f172a);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 320px;
+    }
+
+    .thumb {
+      height: 140px;
+      background: linear-gradient(135deg, #1d4ed8, #312e81);
+      display: grid;
+      place-items: center;
+      color: #dbeafe;
+      font-weight: bold;
+      letter-spacing: 0.6px;
+    }
+
+    .card-content {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      flex: 1;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      flex: 1;
+    }
+
+    .tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      border: 1px solid var(--border);
+      color: #bfdbfe;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.45rem;
+      border-radius: 999px;
+      background: rgba(30, 64, 175, 0.2);
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .card-actions a {
+      text-decoration: none;
+      color: var(--text);
+      background: var(--panel-soft);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.45rem 0.65rem;
+      font-size: 0.86rem;
+    }
+
+    .card-actions a:hover {
+      border-color: var(--accent);
+    }
+
+    .how-to {
+      margin-bottom: 3rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.7);
+      padding: 1rem 1.2rem;
+    }
+
+    .how-to ol {
+      margin: 0.7rem 0 0;
+      color: var(--muted);
+      padding-left: 1.2rem;
+    }
+
+    .how-to strong {
+      color: var(--text);
+    }
+
+    .status {
+      display: inline-block;
+      font-size: 0.78rem;
+      border: 1px solid #14532d;
+      color: #bbf7d0;
+      background: rgba(34, 197, 94, 0.15);
+      border-radius: 999px;
+      padding: 0.18rem 0.5rem;
+      margin-left: 0.4rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      padding: 1rem 0 2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#">Samuil Bikov</a>
+      <nav class="nav-links">
+        <a href="#games">Games</a>
+        <a href="#publish">Publish</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Python Game Portfolio</h1>
+      <p>
+        Hi, I am <strong>Samuil Bikov</strong>. I build fun games with Python and share them with friends.
+        Here you can play demos, see source code, and follow my next releases.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#games">Play My Games</a>
+        <a class="btn" href="https://github.com/your-username" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
+      </div>
+    </section>
+
+    <section id="games">
+      <h2 class="section-title">Featured Games</h2>
+      <p class="section-subtitle">Replace links and descriptions with your real projects.</p>
+
+      <div class="games-grid">
+        <article class="card">
+          <div class="thumb">CAT PLATFORMER</div>
+          <div class="card-content">
+            <h3>Cat Mario Adventure <span class="status">Playable</span></h3>
+            <p>A fast 2D platformer where a cat hero jumps, collects coins, and avoids enemies.</p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Pygame</span>
+              <span class="tag">Platformer</span>
+            </div>
+            <div class="card-actions">
+              <a href="https://your-username.github.io/cat-mario-web/" target="_blank" rel="noopener noreferrer">Play Online</a>
+              <a href="https://github.com/your-username/cat-mario-game" target="_blank" rel="noopener noreferrer">Source Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb" style="background: linear-gradient(135deg, #7c2d12, #7f1d1d);">FACTORY ESCAPE</div>
+          <div class="card-content">
+            <h3>Factory Escape</h3>
+            <p>Horror-style maze challenge with keycards, power systems, and monster chases.</p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Pygame</span>
+              <span class="tag">Survival</span>
+            </div>
+            <div class="card-actions">
+              <a href="https://your-username.github.io/factory-escape-web/" target="_blank" rel="noopener noreferrer">Play Online</a>
+              <a href="https://github.com/your-username/factory-escape-game" target="_blank" rel="noopener noreferrer">Source Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb" style="background: linear-gradient(135deg, #065f46, #134e4a);">COMING SOON</div>
+          <div class="card-content">
+            <h3>Next Game Prototype</h3>
+            <p>New game in progress. Add your screenshots, teaser, and play link when ready.</p>
+            <div class="tags">
+              <span class="tag">Prototype</span>
+              <span class="tag">In Development</span>
+            </div>
+            <div class="card-actions">
+              <a href="#" aria-disabled="true">Play Online</a>
+              <a href="#" aria-disabled="true">Source Code</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="publish" class="how-to">
+      <h2 class="section-title">Publishing on GitHub Pages</h2>
+      <p class="section-subtitle">
+        GitHub Pages hosts static websites. To run Python games in browser, export them to WebAssembly/JS
+        (for example with Pygbag), then link the web build here.
+      </p>
+      <ol>
+        <li><strong>Create a repo</strong> per game and upload the web build files.</li>
+        <li><strong>Enable GitHub Pages</strong> in repository settings (deploy from branch).</li>
+        <li><strong>Copy the page URL</strong> (like <code>https://your-username.github.io/game-name/</code>).</li>
+        <li><strong>Update card links</strong> in this portfolio to point to your live game.</li>
+      </ol>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-subtitle">
+        Want to collaborate or test my games? Reach out:
+      </p>
+      <p>
+        Email: <a href="mailto:you@example.com">you@example.com</a><br>
+        GitHub: <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer">@your-username</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Built with HTML/CSS. Update the placeholder links with your real repositories and live builds.
+    </div>
+  </footer>
+</body>
+</html>
